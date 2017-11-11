@@ -1,12 +1,14 @@
 class DateHelper {
 
-  dataParaTexto(data) {
-    return data.getDate() 
-      + '/' + (data.getMonth() + 1)
-      + '/' + data.getFullYear();
+  constructor() {
+    throw new Error('Esta classe não pode ser instanciada');
+  }
+
+  static dataParaTexto(data) {
+    return `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`;
   }
   
-  textoParaData(texto) {
+  static textoParaData(texto) {
     return new Date(
       ...texto
         .split('-')
