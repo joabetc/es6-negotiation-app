@@ -5,4 +5,8 @@ class Pessoa {
     this.sobrenome = sobrenome;
   }
 
+  obtemNomeCompleto() {
+    return this.nome.concat(' ').concat(this.sobrenome);
+  }
+
 }
