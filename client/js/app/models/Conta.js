@@ -11,15 +11,15 @@ class Conta {
           this._saldo += valor; 
       }
   
-      getSaldo() {
+      get saldo() {
           return this._saldo;
       }
 
-      getTitular() {
+      get titular() {
         return this._titular
       }
 
-      getConta() {
+      get conta() {
         return this._conta;
       }
   }
