@@ -1,7 +1,8 @@
 class Pessoa {
 
-  constructor() {
-    this.nome = '';
-    this.idade = 0;
+  constructor(nome, sobrenome) {
+    this.nome = nome;
+    this.idade = sobrenome;
   }
+
 }

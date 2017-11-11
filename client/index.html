@@ -58,16 +58,12 @@
         <tfoot>
         </tfoot>
     </table>
-    <script src="js/app/models/Negociacao.js"></script>
+    <script src="js/app/models/Pessoa.js"></script>
     <script>
         
-        for(let i = 1; i <= 100; i++) {
-            let nome = 'Joabe';
-            console.log(i);
-        }
+        var pessoa = new Pessoa('Joabe', 'Costa');
+        console.log('Nome completo: ' + pessoa.nome + ' ' + pessoa.sobrenome);
 
-        alert(i);
-        alert(nome);
     </script>
 </body>
 </html>
