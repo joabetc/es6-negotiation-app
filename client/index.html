@@ -58,13 +58,21 @@
     </script>
     <script>
         let lista = new Proxy(new ListaNegociacoes(), {
-            set: function(target, prop, value, receiver) {
-                console.log(`valor anterior: ${target[prop]}, novo valor "${value}"`);
+            get(target, prop, receiver) {
+                if (['adiciona', 'esvazia'].includes(prop) &&
+                        typeof(target[prop]) == typeof(Function)) {
+                    return function() {
+                        console.log(`interceptando ${prop}`);
+                        Reflect.apply(target[prop], target, arguments);
+                    }
+                }
+
                 return Reflect.get(target, prop, receiver);
             }
         });
 
         lista.adiciona(new Negociacao(new Date(), 1, 100));
+        lista.esvazia();
     </script>
 </body>
 </html>
