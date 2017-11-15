@@ -29,6 +29,7 @@ class NegociacaoController {
 
   importaNegociacoes() {
     let service = new NegociacaoService();
+    // Error-first Callback
     service.obterNegociacoesDaSemana((err, negociacoes) => {
       if (err) {
         this._mensagem.texto = err;
