@@ -28,8 +28,34 @@ class NegociacaoController {
   }
 
   importaNegociacoes() {
+    
+    
     let service = new NegociacaoService();
-    // Error-first Callback
+
+    service.obterNegociacoesDaSemana()
+      .then(negociacoes => {
+        negociacoes.forEach(negociacao => 
+          this._listaNegociacoes.adiciona(negociacao));
+        this._mensagem.texto = 'Negociações da semana obtido com sucesso';
+      })
+      .catch(err => this._mensagem.texto = err);
+
+      service.obterNegociacoesDaSemanaAnterior()
+      .then(negociacoes => {
+        negociacoes.forEach(negociacao => 
+          this._listaNegociacoes.adiciona(negociacao));
+        this._mensagem.texto = 'Negociações da semana obtido com sucesso';
+      })
+      .catch(err => this._mensagem.texto = err);
+
+      service.obterNegociacoesDaSemanaRetrasada()
+      .then(negociacoes => {
+        negociacoes.forEach(negociacao => 
+          this._listaNegociacoes.adiciona(negociacao));
+        this._mensagem.texto = 'Negociações da semana obtido com sucesso';
+      })
+      .catch(err => this._mensagem.texto = err);
+    /*
     service.obterNegociacoesDaSemana((err, negociacoes) => {
       if (err) {
         this._mensagem.texto = err;
@@ -56,7 +82,7 @@ class NegociacaoController {
           this._mensagem.texto = 'Negociações importadas com sucesso.';
         });
       });
-    });
+    });*/
   }
 
   apaga() {
