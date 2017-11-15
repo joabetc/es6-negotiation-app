@@ -1,19 +1,29 @@
 class ProxyFactory {
 
   static create(object, props, action) {
-    return new Proxy(new ListaNegociacoes(), {
+    return new Proxy(object, {
       get(target, prop, receiver) {
-          if (props.includes(prop) &&
-                  typeof(target[prop]) == typeof(Function)) {
+          if (props.includes(prop) && ProxyFactory._isFunction(target[prop])) {
               return function() {
-                  console.log(`interceptando ${prop}`);
+                  console.log(`a propriedade "${prop}" foi interceptada`);
                   Reflect.apply(target[prop], target, arguments);
                   return action(target);
               }
           }
   
           return Reflect.get(target, prop, receiver);
+      },
+
+      set(target, prop, value, receiver) {
+        if(props.includes(prop)) {
+          action(target);
+        }
+        return Reflect.set(target, prop, value, receiver);
       }
     });
+  }
+
+  static _isFunction(func) {
+    return typeof(func) == typeof(Function);
   }
 }
