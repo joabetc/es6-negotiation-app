@@ -6,8 +6,9 @@ class ProxyFactory {
           if (props.includes(prop) && ProxyFactory._isFunction(target[prop])) {
               return function() {
                   console.log(`a propriedade "${prop}" foi interceptada`);
-                  Reflect.apply(target[prop], target, arguments);
-                  return action(target);
+                  let retorno = Reflect.apply(target[prop], target, arguments);
+                  action(target);
+                  return retorno;
               }
           }
   
@@ -16,6 +17,7 @@ class ProxyFactory {
 
       set(target, prop, value, receiver) {
         if(props.includes(prop)) {
+          target[prop] = value;
           action(target);
         }
         return Reflect.set(target, prop, value, receiver);
