@@ -1,0 +1,1 @@
+class NegociacaoAcao extends Negociacao {}
