@@ -10,7 +10,7 @@ class ConnectionFactory {
 
   static getConnection() {
     return new Promise((resolve, reject) => {
-      let openRequest = window.indexedDB.open('negociacao', 1);
+      let openRequest = window.indexedDB.open(dbName, version);
 
       openRequest.onupgradeneeded = e => {
 
