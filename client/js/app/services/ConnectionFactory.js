@@ -1,8 +1,8 @@
 var ConnectionFactory = (function() {
 
-  var stores = ['negociacoes'];
-  var version = 1;
-  var dbName = 'negociacao';
+  const stores = ['negociacoes'];
+  const version = 1;
+  const dbName = 'negociacao';
   
   var connection = null;
   var close = null;
