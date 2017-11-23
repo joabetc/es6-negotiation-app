@@ -23,6 +23,9 @@ var ConnectionFactory = (function() {
         openRequest.onsuccess = e => {
           if (!connection) {
             connection = e.target.result;
+            connection.close = function() {
+              throw new Error('Você não pode fechar diretamente a conexão');
+            }
           }
           resolve(connection);
         };
