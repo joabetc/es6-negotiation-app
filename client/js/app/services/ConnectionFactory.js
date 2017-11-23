@@ -51,6 +51,7 @@ var ConnectionFactory = (function() {
     static closeConnection() {
       if (connection) {
         close();
+        //or Reflect.apply(close, connection, []);
         connection = null;
       }
     }
