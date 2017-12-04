@@ -20,6 +20,11 @@ class NegociacaoController {
 
     this._ordemAtual = '';
 
+    this._init();
+  }
+  
+  _init() {
+    
     ConnectionFactory
       .getConnection()
       .then(connection => new NegociacaoDao(connection))
@@ -31,7 +36,10 @@ class NegociacaoController {
         console.log(error);
         this._mensagem = error;
       });
-
+  
+    setInterval(() => {
+      this.importaNegociacoes();
+    }, 3000);
   }
 
   adiciona(event) {
@@ -62,8 +70,10 @@ class NegociacaoController {
 
     service
       .obterNegociacoes()
-      .then(negociacoes => negociacoes.filter(
-        negociacao => this._listaNegociacoes.negociacoes.indexOf(negociacao) == -1)
+      .then(negociacoes => 
+        negociacoes.filter(negociacao => 
+          !this._listaNegociacoes.negociacoes.some(negociacaoExitente => 
+            JSON.stringify(negociacao) == JSON.stringify(negociacaoExitente)))
       )
       .then(negociacoes => negociacoes.forEach(negociacao => {
           this._listaNegociacoes.adiciona(negociacao);
