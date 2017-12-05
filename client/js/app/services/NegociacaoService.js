@@ -95,4 +95,17 @@ class NegociacaoService {
     });
   }
 
+  import(currentList) {
+    return this.obterNegociacoes()
+    .then(negociacoes => 
+      negociacoes.filter(negociacao => 
+        !currentList.some(negociacaoExitente => 
+          JSON.stringify(negociacao) == JSON.stringify(negociacaoExitente)))
+    )
+    .catch(error => {
+      console.log(error);
+      throw new Error('Não foi possível buscar negociações para importar');
+    });
+  }
+
 }
