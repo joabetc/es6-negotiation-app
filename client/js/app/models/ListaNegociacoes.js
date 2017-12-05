@@ -4,7 +4,7 @@ class ListaNegociacoes {
     this._negociacoes = [];
   }
 
-  adiciona(negociacao) {
+  add(negociacao) {
     this._negociacoes.push(negociacao);
   }
 

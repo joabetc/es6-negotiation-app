@@ -11,7 +11,7 @@ class NegociacaoController {
     this._listaNegociacoes = new Bind(
       new ListaNegociacoes(),
       new NegociacoesView($('#negociacoesView')),
-      'adiciona', 'esvazia', 'sort', 'reverseOrder');
+      'add', 'esvazia', 'sort', 'reverseOrder');
       
     this._mensagem = new Bind(
       new Mensagem(),
@@ -42,26 +42,20 @@ class NegociacaoController {
     }, 3000);
   }
 
-  adiciona(event) {
+  add(event) {
 
     event.preventDefault();
 
-    ConnectionFactory
-      .getConnection()
-      .then(connection => {
-        
-        let negociacao = this._criaNegociacao();
-        
-        new NegociacaoDao(connection)
-          .add(negociacao)
-          .then(() => {
-            this._listaNegociacoes.adiciona(negociacao);
-            this._mensagem.texto = 'Negociação adicionada com sucesso';
-            this._limpaFormulario();
-          })
-      })
-      .catch(err => this._mensagem.texto = err);
+    let negociacao = this._criaNegociacao();
 
+    new NegociacaoService()
+      .add(negociacao)
+      .then(message => {
+        this._listaNegociacoes.add(negociacao);
+        this._mensagem.texto = message;
+        this._limpaFormulario();
+      })
+      .catch(error => this._mensagem.texto = error);
   }
 
   importaNegociacoes() {
@@ -76,7 +70,7 @@ class NegociacaoController {
             JSON.stringify(negociacao) == JSON.stringify(negociacaoExitente)))
       )
       .then(negociacoes => negociacoes.forEach(negociacao => {
-          this._listaNegociacoes.adiciona(negociacao);
+          this._listaNegociacoes.add(negociacao);
           this._mensagem.texto = 'Negociações do período importadas com sucesso.';
         }))
       .catch(err => this._mensagem.texto = err);

@@ -60,4 +60,15 @@ class NegociacaoService {
     });
   }
 
+  add(negociacao) {
+    return ConnectionFactory
+    .getConnection()
+    .then(connection => new NegociacaoDao(connection))
+    .then(dao => dao.add(negociacao))
+    .then(() => 'Negociação adicionada com sucesso')
+    .catch(() => {
+      throw new Error('Não foi possível adicionar a negociação');
+    });
+  }
+
 }
