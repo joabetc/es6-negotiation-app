@@ -100,7 +100,7 @@ class NegociacaoService {
     .then(negociacoes => 
       negociacoes.filter(negociacao => 
         !currentList.some(negociacaoExitente => 
-          JSON.stringify(negociacao) == JSON.stringify(negociacaoExitente)))
+          negociacao.isEquals(negociacaoExitente)))
     )
     .catch(error => {
       console.log(error);
