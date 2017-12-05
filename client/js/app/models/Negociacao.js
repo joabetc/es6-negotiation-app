@@ -24,6 +24,8 @@ class Negociacao {
   }
 
   isEquals(negociacao) {
-    return JSON.stringify(this) == JSON.stringify(negociacao);
+    //return JSON.stringify(this) == JSON.stringify(negociacao);
+    return this._data.getTime() == negociacao.data.getTime()
+      && this._valor == negociacao.valor;
   }
 }
