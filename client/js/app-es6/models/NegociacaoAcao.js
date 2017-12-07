@@ -1,1 +1,3 @@
-class NegociacaoAcao extends Negociacao {}
+import { Negociacao } from './Negociacao';
+
+export class NegociacaoAcao extends Negociacao {}
