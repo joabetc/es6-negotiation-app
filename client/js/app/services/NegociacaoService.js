@@ -13,6 +13,8 @@ var _ConnectionFactory = require('./ConnectionFactory');
 
 var _NegociacaoDao = require('../dao/NegociacaoDao');
 
+var _Negociacao = require('../models/Negociacao');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var NegociacaoService = exports.NegociacaoService = function () {
@@ -29,7 +31,7 @@ var NegociacaoService = exports.NegociacaoService = function () {
       return this._http.get('negociacoes/semana').then(function (negociacoes) {
         console.log(negociacoes);
         return negociacoes.map(function (obj) {
-          return new Negociacao(new Date(obj.data), obj.quantidade, obj.valor);
+          return new _Negociacao.Negociacao(new Date(obj.data), obj.quantidade, obj.valor);
         });
       }).catch(function (err) {
         console.log(err);
@@ -43,7 +45,7 @@ var NegociacaoService = exports.NegociacaoService = function () {
       return this._http.get('negociacoes/anterior').then(function (negociacoes) {
         console.log(negociacoes);
         return negociacoes.map(function (obj) {
-          return new Negociacao(new Date(obj.data), obj.quantidade, obj.valor);
+          return new _Negociacao.Negociacao(new Date(obj.data), obj.quantidade, obj.valor);
         });
       }).catch(function (err) {
         console.log(err);
@@ -57,7 +59,7 @@ var NegociacaoService = exports.NegociacaoService = function () {
       return this._http.get('negociacoes/retrasada').then(function (negociacoes) {
         console.log(negociacoes);
         return negociacoes.map(function (obj) {
-          return new Negociacao(new Date(obj.data), obj.quantidade, obj.valor);
+          return new _Negociacao.Negociacao(new Date(obj.data), obj.quantidade, obj.valor);
         });
       }).catch(function (err) {
         console.log(err);
