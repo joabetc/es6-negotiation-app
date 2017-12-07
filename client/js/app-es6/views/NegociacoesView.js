@@ -1,10 +1,17 @@
 import { View } from './View';
 import { DateHelper } from '../helpers/DateHelper';
+import { currentInstance } from '../controllers/NegociacaoController';
 
 export class NegociacoesView extends View {
 
   constructor(element) {
     super(element);
+
+    element.addEventListener('click', function(envent) {
+      if (event.target.nodeName == 'TH') {
+        currentInstance().sort(event.target.textContent.toLowerCase());
+      }
+    });
   }
 
   template(model) {
@@ -12,10 +19,10 @@ export class NegociacoesView extends View {
       <table class="table table-hover table-bordered">
         <thead>
             <tr>
-                <th onclick="negociacaoController.sort('data')">DATA</th>
-                <th onclick="negociacaoController.sort('quantidade')">QUANTIDADE</th>
-                <th onclick="negociacaoController.sort('valor')">VALOR</th>
-                <th onclick="negociacaoController.sort('volume')">VOLUME</th>
+                <th>DATA</th>
+                <th>QUANTIDADE</th>
+                <th>VALOR</th>
+                <th>VOLUME</th>
             </tr>
         </thead>
         
